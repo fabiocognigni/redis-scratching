@@ -1,8 +1,9 @@
 (ns carmine-scratch.core
-  (:require [taoensso.carmine :as car :refer (wcar)])
+  (:require [taoensso.carmine :as car :refer (wcar)]
+            [clj-time.core :as clj-time])
   (:gen-class
     :methods [#^{:static true} [get [String] Object]
-              #^{:static true} [set [String Object] clojure.lang.PersistentVector]]))
+              #^{:static true} [set [String Object] Object]]))
 
 (def server1-conn {:pool {} :spec {}})
 ;; See `wcar` docstring for opts
@@ -18,8 +19,13 @@
 (defn set-entry
   "Sets a key - value entry and the inverted entry for reverse lookup"
   [key val]
-  (wcar* (car/set key val)
-         (car/set val key)))
+  (let [start (clj-time/now)]
+  (do
+    (println "Start Clj!")
+    (wcar* (car/set key val))
+         ;;(car/set val key))
+    (println "End Clj: " (clj-time/in-msecs (clj-time/interval start (clj-time/now))))
+    )))
 
 (defn get-val
   "Get the value by the key passed as param"

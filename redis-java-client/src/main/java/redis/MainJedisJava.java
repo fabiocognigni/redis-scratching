@@ -26,6 +26,9 @@ public class MainJedisJava {
 		System.out.println("GET:" + (System.currentTimeMillis() - start));
 		System.out.println(val);
 		
+		jedis.close();
+		//jedis.shutdown();
+		
 		//======================================================================
 		// PIPELINING
 		//======================================================================  

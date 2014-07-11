@@ -19,13 +19,13 @@
 (defn set-entry
   "Sets a key - value entry and the inverted entry for reverse lookup"
   [key val]
-  (let [start (clj-time/now)]
-  (do
-    (println "Start Clj!")
-    (wcar* (car/set key val))
-         ;;(car/set val key))
-    (println "End Clj: " (clj-time/in-msecs (clj-time/interval start (clj-time/now))))
-    )))
+  ;;(let [start (clj-time/now)]
+  ;;(do
+    ;;(println "Start Clj!")
+    (wcar* (car/set key val)
+           (car/set val key)))
+    ;;(println "End Clj: " (clj-time/in-msecs (clj-time/interval start (clj-time/now))))
+    ;;)))
 
 (defn get-val
   "Get the value by the key passed as param"
